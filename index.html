@@ -13,11 +13,11 @@
 
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
             background: linear-gradient(45deg, #ff9a9e, #fecfef, #fad0c4, #ffd1ff);
             background-size: 400% 400%;
             animation: gradientAnimation 10s ease infinite;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
         }
 
@@ -28,7 +28,7 @@
 
         /* Floating Hearts Background */
         .floating-hearts {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             pointer-events: none;
@@ -59,7 +59,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             padding: 20px;
             position: relative;
             z-index: 10;
@@ -69,13 +69,14 @@
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 50px;
+            padding: 40px;
             text-align: center;
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             width: 100%;
             animation: boxFloat 3s ease-in-out infinite;
+            margin-bottom: 20px;
         }
 
         @keyframes boxFloat {
@@ -115,6 +116,9 @@
             justify-content: center;
             margin-top: 30px;
             flex-wrap: wrap;
+            position: relative;
+            min-height: 80px;
+            align-items: center;
         }
 
         .btn {
@@ -128,12 +132,15 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+            min-width: 150px;
         }
 
         .yes-btn {
             background: linear-gradient(45deg, #ff6b9d, #c44569);
             color: white;
             animation: yesButtonPulse 1.5s ease-in-out infinite;
+            position: relative;
+            z-index: 20;
         }
 
         .yes-btn:hover {
@@ -149,12 +156,19 @@
         .no-btn {
             background: linear-gradient(45deg, #ffd89b, #19547b);
             color: white;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 15;
         }
 
         .no-btn:hover {
-            transform: scale(0.9);
+            transform: scale(0.95);
+        }
+
+        /* Moving No Button */
+        .no-btn.moving {
+            position: absolute !important;
+            transition: all 0.5s ease-out;
         }
 
         /* Celebration Styles (Hidden Initially) */
@@ -168,6 +182,7 @@
             z-index: 1000;
             background: radial-gradient(circle, rgba(255, 182, 193, 0.9), rgba(255, 192, 203, 0.8));
             backdrop-filter: blur(10px);
+            overflow-y: auto;
         }
 
         .celebration.active {
@@ -176,6 +191,7 @@
             justify-content: center;
             align-items: center;
             animation: celebrationFadeIn 1s ease-in;
+            padding: 20px;
         }
 
         @keyframes celebrationFadeIn {
@@ -189,6 +205,7 @@
             text-shadow: 3px 3px 15px rgba(255, 107, 157, 0.8);
             margin-bottom: 30px;
             animation: celebrationTitleBounce 1s ease-in-out infinite;
+            text-align: center;
         }
 
         @keyframes celebrationTitleBounce {
@@ -233,6 +250,8 @@
             margin: 30px 0;
             border: 1px solid rgba(255, 255, 255, 0.3);
             animation: aboutSectionSlide 1s ease-in-out 2s both;
+            max-width: 600px;
+            width: 100%;
         }
 
         @keyframes aboutSectionSlide {
@@ -327,14 +346,114 @@
             box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
         }
 
+        /* Encouragement Message */
+        .encouragement-msg {
+            font-size: 1.3rem;
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            animation: bounce 1s infinite;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .title { font-size: 2.5rem; }
-            .question { font-size: 1.8rem; }
-            .celebration-title { font-size: 3rem; }
-            .proposal-box { padding: 30px 20px; }
-            .buttons-container { flex-direction: column; align-items: center; }
-            .btn { width: 200px; }
+            .title { 
+                font-size: 2.5rem; 
+                margin-bottom: 15px;
+            }
+            .question { 
+                font-size: 1.6rem; 
+                margin-bottom: 25px;
+            }
+            .celebration-title { 
+                font-size: 2.5rem; 
+                margin-bottom: 20px;
+            }
+            .proposal-box { 
+                padding: 25px 20px; 
+                margin: 10px;
+            }
+            .buttons-container { 
+                flex-direction: column; 
+                align-items: center;
+                gap: 20px;
+                min-height: 120px;
+            }
+            .btn { 
+                width: 180px;
+                font-size: 1.2rem;
+                padding: 12px 25px;
+            }
+            .about-section {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+            .about-title {
+                font-size: 2rem;
+            }
+            .about-text {
+                font-size: 1.1rem;
+            }
+            .pickup-text {
+                font-size: 1.2rem;
+            }
+            .pickup-line {
+                padding: 15px;
+            }
+            .bg-heart {
+                font-size: 25px;
+            }
+            .encouragement-msg {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title { font-size: 2rem; }
+            .question { font-size: 1.4rem; }
+            .celebration-title { font-size: 2rem; }
+            .btn { 
+                width: 150px;
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+            .about-title { font-size: 1.7rem; }
+            .about-text { font-size: 1rem; }
+            .pickup-text { font-size: 1.1rem; }
+        }
+
+        /* Additional animations */
+        @keyframes heartExplosion {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0) rotate(360deg) translateY(-200px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sparkleEffect {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -348,7 +467,7 @@
             <h1 class="title">Anshika! 💕</h1>
             <p class="question">Will you be my Best Friend? 🥺</p>
             
-            <div class="buttons-container">
+            <div class="buttons-container" id="buttonsContainer">
                 <button class="btn yes-btn" id="yesBtn" onclick="sayYes()">
                     YES! 💖
                 </button>
@@ -356,6 +475,8 @@
                     No 😔
                 </button>
             </div>
+            
+            <div id="encouragementMessage"></div>
         </div>
 
         <!-- About Anshika Section -->
@@ -393,10 +514,10 @@
         <div class="fireworks" id="fireworks"></div>
         
         <h1 class="celebration-title">YAAAYYY! 🎉💕</h1>
-        <h2 style="font-size: 2.5rem; color: white; text-shadow: 2px 2px 10px rgba(255,107,157,0.8); margin-bottom: 20px;">
+        <h2 style="font-size: 2.5rem; color: white; text-shadow: 2px 2px 10px rgba(255,107,157,0.8); margin-bottom: 20px; text-align: center;">
             WE ARE BEST FRIENDS FOREVER! 
         </h2>
-        <p style="font-size: 1.5rem; color: white; text-align: center; max-width: 600px; line-height: 1.8; text-shadow: 1px 1px 5px rgba(0,0,0,0.3);">
+        <p style="font-size: 1.5rem; color: white; text-align: center; max-width: 600px; line-height: 1.8; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); padding: 0 20px;">
             Anshika, I'm so happy you said yes! This is the beginning of the most amazing friendship ever! 
             We're going to create the most beautiful memories, share countless laughs, and support each other through everything! 
             You've just made me the happiest person alive! 💖✨
@@ -411,6 +532,8 @@
         let noClickCount = 0;
         const noButton = document.getElementById('noBtn');
         const yesButton = document.getElementById('yesBtn');
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        const encouragementDiv = document.getElementById('encouragementMessage');
 
         // Create floating hearts background
         function createFloatingHeart() {
@@ -447,56 +570,108 @@
             // Create confetti
             createConfetti();
             
-            // Play celebration sound effect (if you want to add audio)
+            // Celebrate with hearts
             celebrateWithHearts();
         }
 
-        // No button function with moving behavior
+        // No button function with improved moving behavior
         function sayNo() {
             noClickCount++;
             
-            // Make the No button smaller and move it
-            const randomX = Math.random() * (window.innerWidth - 200);
-            const randomY = Math.random() * (window.innerHeight - 100);
+            // Get container boundaries for safe positioning
+            const containerRect = buttonsContainer.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
             
-            noButton.style.position = 'absolute';
+            // Calculate safe positioning area
+            const maxX = Math.max(50, windowWidth - buttonRect.width - 50);
+            const maxY = Math.max(50, windowHeight - buttonRect.height - 50);
+            
+            // Generate random position within safe bounds
+            const randomX = Math.random() * (maxX - 50) + 50;
+            const randomY = Math.random() * (maxY - 50) + 50;
+            
+            // Make the No button move around
+            noButton.classList.add('moving');
+            noButton.style.position = 'fixed';
             noButton.style.left = randomX + 'px';
             noButton.style.top = randomY + 'px';
-            noButton.style.transform = `scale(${1 - noClickCount * 0.1})`;
+            noButton.style.transform = `scale(${Math.max(0.6, 1 - noClickCount * 0.05)})`;
+            noButton.style.zIndex = '100';
             
             // Make Yes button bigger and more attractive
-            yesButton.style.transform = `scale(${1 + noClickCount * 0.1})`;
-            yesButton.style.fontSize = `${1.4 + noClickCount * 0.1}rem`;
+            yesButton.style.transform = `scale(${1 + noClickCount * 0.05})`;
             
             // Change button text based on click count
-            if (noClickCount === 1) {
-                noButton.textContent = 'Really No? 🥺';
-            } else if (noClickCount === 2) {
-                noButton.textContent = 'Think Again! 💭';
-            } else if (noClickCount === 3) {
-                noButton.textContent = 'Please? 🙏';
-            } else if (noClickCount >= 4) {
-                noButton.textContent = 'Impossible! 😅';
-                noButton.style.fontSize = '0.8rem';
+            const noTexts = [
+                'Really No? 🥺',
+                'Think Again! 💭', 
+                'Please? 🙏',
+                'Come on! 😊',
+                'Pretty Please? 🥺',
+                'Just try YES! 💕',
+                'You know you want to! 😄',
+                'One more chance? 🌟',
+                'YES is waiting! ✨'
+            ];
+            
+            if (noClickCount <= noTexts.length) {
+                noButton.textContent = noTexts[noClickCount - 1] || 'Still No? 😅';
+            } else {
+                noButton.textContent = 'Seriously? 😂';
             }
             
-            // Make the No button harder to click
-            if (noClickCount >= 5) {
-                noButton.style.display = 'none';
-                // Show a message encouraging to click Yes
-                showEncouragementMessage();
-            }
+            // Show encouragement messages
+            showEncouragementMessage();
+            
+            // Add some fun effects
+            createSparklesAroundButton();
         }
 
         function showEncouragementMessage() {
-            const message = document.createElement('div');
-            message.innerHTML = `
-                <p style="font-size: 1.5rem; color: white; text-align: center; margin-top: 20px; animation: bounce 1s infinite;">
-                    The "No" button is tired of running! 😄<br>
-                    How about giving "Yes" a chance? 💖
+            const messages = [
+                "The 'No' button is getting shy! 😊",
+                "Look how the 'YES' button is glowing! ✨",
+                "I think the 'No' button wants to hide! 😄",
+                "The 'YES' button is calling your name! 💖",
+                "Even the 'No' button thinks you should say YES! 🥺",
+                "The universe wants you to click YES! 🌟",
+                "Your heart knows the answer is YES! 💕",
+                "The 'No' button is tired of running away! 😂",
+                "Just give 'YES' a chance, Anshika! 🌸"
+            ];
+            
+            const messageIndex = Math.min(noClickCount - 1, messages.length - 1);
+            
+            encouragementDiv.innerHTML = `
+                <p class="encouragement-msg">
+                    ${messages[messageIndex]}
                 </p>
             `;
-            document.querySelector('.proposal-box').appendChild(message);
+        }
+
+        function createSparklesAroundButton() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.position = 'fixed';
+                    sparkle.style.left = (yesButton.offsetLeft + Math.random() * 100) + 'px';
+                    sparkle.style.top = (yesButton.offsetTop + Math.random() * 50) + 'px';
+                    sparkle.style.fontSize = '25px';
+                    sparkle.style.pointerEvents = 'none';
+                    sparkle.style.animation = 'sparkleEffect 1.5s ease-out forwards';
+                    sparkle.style.zIndex = '999';
+                    document.body.appendChild(sparkle);
+
+                    setTimeout(() => {
+                        if (sparkle.parentNode) {
+                            sparkle.remove();
+                        }
+                    }, 1500);
+                }, i * 200);
+            }
         }
 
         // Create fireworks for celebration
@@ -570,31 +745,6 @@
             }
         }
 
-        // Add heart explosion animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes heartExplosion {
-                0% {
-                    transform: scale(0) rotate(0deg);
-                    opacity: 1;
-                }
-                50% {
-                    transform: scale(1.5) rotate(180deg);
-                    opacity: 0.8;
-                }
-                100% {
-                    transform: scale(0) rotate(360deg) translateY(-200px);
-                    opacity: 0;
-                }
-            }
-            
-            @keyframes bounce {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
-            }
-        `;
-        document.head.appendChild(style);
-
         // Restart function
         function restartProposal() {
             // Reset everything
@@ -602,41 +752,42 @@
             document.getElementById('celebrationScreen').classList.remove('active');
             document.getElementById('mainContainer').style.display = 'flex';
             
-            // Reset buttons
+            // Reset buttons to original state
+            noButton.classList.remove('moving');
             noButton.style.position = 'relative';
             noButton.style.left = 'auto';
             noButton.style.top = 'auto';
             noButton.style.transform = 'scale(1)';
-            noButton.style.display = 'inline-block';
             noButton.textContent = 'No 😔';
-            noButton.style.fontSize = '1.4rem';
+            noButton.style.zIndex = '15';
             
             yesButton.style.transform = 'scale(1)';
-            yesButton.style.fontSize = '1.4rem';
             
-            // Remove any encouragement messages
-            const messages = document.querySelectorAll('.proposal-box p:last-child');
-            messages.forEach(msg => {
-                if (msg.innerHTML.includes('tired of running')) {
-                    msg.remove();
-                }
-            });
+            // Clear encouragement messages
+            encouragementDiv.innerHTML = '';
         }
 
-        // Welcome message
+        // Welcome message with better timing
         setTimeout(() => {
-            alert('💕 Welcome to the most special proposal ever! 💕\n\nAnshika, this is made just for you with lots of love!\nTry clicking "No" and see what happens! 😄');
-        }, 1000);
+            if (window.innerWidth <= 768) {
+                alert('💕 Welcome, Anshika! 💕\n\nThis special page is made just for you!\nTry clicking "No" and see what happens! 😄');
+            } else {
+                alert('💕 Welcome to the most special proposal ever! 💕\n\nAnshika, this is made just for you with lots of love!\nTry clicking "No" and see what happens! 😄');
+            }
+        }, 1500);
 
-        // Add some interactive hover effects
+        // Improved mouse sparkle effect with better performance
+        let lastSparkleTime = 0;
         document.addEventListener('mousemove', function(e) {
-            if (Math.random() > 0.95) {
+            const now = Date.now();
+            if (now - lastSparkleTime > 100 && Math.random() > 0.97) {
+                lastSparkleTime = now;
                 const sparkle = document.createElement('div');
                 sparkle.innerHTML = '✨';
                 sparkle.style.position = 'fixed';
                 sparkle.style.left = e.clientX + 'px';
                 sparkle.style.top = e.clientY + 'px';
-                sparkle.style.fontSize = '20px';
+                sparkle.style.fontSize = '15px';
                 sparkle.style.pointerEvents = 'none';
                 sparkle.style.animation = 'sparkleEffect 1s ease-out forwards';
                 sparkle.style.zIndex = '999';
@@ -650,21 +801,39 @@
             }
         });
 
-        // Add sparkle animation
-        const sparkleStyle = document.createElement('style');
-        sparkleStyle.textContent = `
-            @keyframes sparkleEffect {
-                0% {
-                    transform: scale(0) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(1) rotate(360deg);
-                    opacity: 0;
+        // Handle window resize to reposition moving button safely
+        window.addEventListener('resize', function() {
+            if (noButton.classList.contains('moving')) {
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                const buttonRect = noButton.getBoundingClientRect();
+                
+                // If button is outside safe area, reposition it
+                if (buttonRect.right > windowWidth - 20 || buttonRect.bottom > windowHeight - 20) {
+                    const safeX = Math.min(parseInt(noButton.style.left) || 0, windowWidth - 180);
+                    const safeY = Math.min(parseInt(noButton.style.top) || 0, windowHeight - 80);
+                    noButton.style.left = Math.max(20, safeX) + 'px';
+                    noButton.style.top = Math.max(20, safeY) + 'px';
                 }
             }
-        `;
-        document.head.appendChild(sparkleStyle);
+        });
+
+        // Prevent right-click context menu for fun
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            createSparklesAroundButton();
+        });
+
+        // Add some fun keyboard interactions
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                sayYes();
+            } else if (e.key === 'Escape') {
+                if (noClickCount > 0) {
+                    createSparklesAroundButton();
+                }
+            }
+        });
     </script>
 </body>
 </html>
